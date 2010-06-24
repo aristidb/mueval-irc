@@ -33,7 +33,8 @@ interpreter :: Options -> Interpreter (String,String,String)
 interpreter Options { extensions = exts, namedExtensions = nexts,
                       rLimits = rlimits,
                       loadFile = load, expression = expr,
-                      modules = m } = do
+                      modules = m, 
+                      printType = typeCheckOnly } = do
                                   let lexts = (guard exts >> glasgowExtensions) ++ map read nexts
                                   unless (null lexts) $ set [languageExtensions := lexts]
 
@@ -59,7 +60,7 @@ interpreter Options { extensions = exts, namedExtensions = nexts,
                                   -- we don't check if the expression typechecks
                                   -- this way we get an "InterpreterError" we can display
                                   etype <- typeOf expr
-                                  result <- eval expr
+                                  result <- if typeCheckOnly then return "Evaluation didn't happen" else eval expr
 
                                   return (expr, etype, result)
 
@@ -69,7 +70,7 @@ interpreterSession :: Options -> IO ()
 interpreterSession opts = do r <- runInterpreter (interpreter opts)
                              case r of
                                  Left err -> printInterpreterError err
-                                 Right (e,et,val) -> when (printType opts) (sayIO e >> sayIO et) >> sayIO val
+                                 Right (e,et,val) -> if printType opts then sayIO et else sayIO val
 
 mvload :: FilePath -> IO ()
 mvload lfl = do canonfile <- makeRelativeToCurrentDirectory lfl
