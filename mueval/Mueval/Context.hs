@@ -21,10 +21,12 @@ cleanModules = all (`elem` defaultModules)
    sources. -}
 defaultModules :: [String]
 defaultModules = ["Prelude",
-                  "ShowQ",
+--                  "ShowQ",
+                  "ShowIO",
                   "ShowFun",
                   "SimpleReflect",
                   "Data.Function",
+                  "Data.Number.CReal",
                   "Control.Applicative",
                   "Control.Arrow",
                   "Control.Monad",
