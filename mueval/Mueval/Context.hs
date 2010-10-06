@@ -78,7 +78,17 @@ defaultModules = ["Prelude",
                "System.Random",
                "Test.QuickCheck",
                "Text.PrettyPrint.HughesPJ",
-               "Text.Printf"]
+               "Text.Printf",
+               "Data.Random.RVar",
+               "Data.Random.Distribution",
+               "Data.Random.Distribution.Gamma",
+               "Data.Random.Distribution.Normal",
+               "Data.Random.Distribution.Uniform",
+               "Data.Random.Distribution.Uniform.Exclusive",
+               "Data.Random.Dovetail",
+               "Data.Random.Extras",
+               "Data.Random.Show.Unsafe",
+               "Data.Random.Shuffle.Weighted"]
 
 {- | Borrowed from Lambdabot, this is the whitelist of modules which should be
    safe to import functions from, but which we don't want to import by
